@@ -27,28 +27,26 @@ export default function Home() {
       <Suspense fallback={null}>
         <div className="absolute inset-0">
           <Spline
-        scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode" 
-      />
+            scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode" 
+          />
         </div>
       </Suspense>
 
-
-
-          {/* Copyright text in bottom right corner */}
-          <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
-            <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
-          </div>
-          
-          {/* Gradient overlay box in bottom right corner */}
-          <div 
-            className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
-            style={{
-              background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)'
-            }}
-          ></div>
-      )}
+      {/* Copyright text in bottom right corner */}
+      <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
+        <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
+      </div>
+      
+      {/* Gradient overlay box in bottom right corner */}
+      <div 
+        className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)'
+        }}
+      ></div>
 
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
+    </main>
   );
 }
