@@ -18,7 +18,7 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
           <div className="text-center space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-            <p className="text-white text-lg font-medium">hi, thanks for visiting my site<br/>the site is loading, one moment please</p>
+            <p className="text-gray-800 text-lg font-medium">hi, thanks for visiting my site<br/>the site is loading, one moment please</p>
           </div>
         </div>
       )}
