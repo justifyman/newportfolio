@@ -36,6 +36,43 @@ export default function Home() {
       {/* These elements only appear after loading is complete */}
       {!isLoading && (
         <>
+          {/* Navigation Cards */}
+          {/* ABOUT card - robot's left (from its POV), tilted left */}
+          <div 
+            className="absolute top-1/3 left-1/4 z-20 cursor-pointer transform -rotate-12 hover:scale-105 transition-all duration-300"
+            style={{
+              transform: 'rotate(-12deg) translateZ(0)',
+            }}
+          >
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg border border-gray-200">
+              <h3 className="text-gray-800 font-semibold text-lg tracking-wide">ABOUT</h3>
+            </div>
+          </div>
+
+          {/* CONTACT card - below ABOUT */}
+          <div 
+            className="absolute top-1/2 left-1/5 z-20 cursor-pointer transform -rotate-6 hover:scale-105 transition-all duration-300"
+            style={{
+              transform: 'rotate(-6deg) translateZ(0)',
+            }}
+          >
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg border border-gray-200">
+              <h3 className="text-gray-800 font-semibold text-lg tracking-wide">CONTACT</h3>
+            </div>
+          </div>
+
+          {/* PROJECTS card - beside robot's right leg */}
+          <div 
+            className="absolute bottom-1/3 right-1/3 z-20 cursor-pointer transform rotate-8 hover:scale-105 transition-all duration-300"
+            style={{
+              transform: 'rotate(8deg) translateZ(0)',
+            }}
+          >
+            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-6 py-3 shadow-lg border border-gray-200">
+              <h3 className="text-gray-800 font-semibold text-lg tracking-wide">PROJECTS</h3>
+            </div>
+          </div>
+
           {/* Copyright text in bottom right corner */}
           <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
             <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
