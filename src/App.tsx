@@ -14,7 +14,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black relative overflow-hidden">
-      {/* Loading fallback - shows for 3 seconds */}
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
           <div className="text-center space-y-4">
