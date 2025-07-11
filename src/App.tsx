@@ -5,7 +5,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Force loading screen to show for 3 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 500);
