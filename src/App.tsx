@@ -8,7 +8,7 @@ export default function Home() {
     // Force loading screen to show for 3 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1100);
 
     return () => clearTimeout(timer);
   }, []);
