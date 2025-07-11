@@ -39,13 +39,13 @@ export default function Home() {
           {/* Navigation Cards */}
           {/* PROJECTS card - robot's left (from its POV), 3D perspective */}
           <div 
-            className="absolute top-1/4 left-1/6 z-20 cursor-pointer hover:scale-105 transition-all duration-300"
+            className="absolute top-3/4 left-1/6 z-20 cursor-pointer hover:scale-105 transition-all duration-300"
             style={{
-              transform: 'perspective(1000px) rotateY(45deg) rotateX(-15deg)',
+              transform: 'perspective(1000px) rotateY(45deg) rotateX(-5deg)',
             }}
           >
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-8 py-5 shadow-xl border border-gray-200">
-              <h3 className="text-gray-800 font-bold text-2xl tracking-wide">PROJECTS</h3>
+            <div className="bg-white/30 backdrop-blur-sm rounded-lg px-12 py-8 shadow-xl border border-gray-200/50">
+              <h3 className="text-gray-800 font-bold text-3xl tracking-wide">PROJECTS</h3>
             </div>
           </div>
 
@@ -53,11 +53,11 @@ export default function Home() {
           <div 
             className="absolute top-1/4 right-1/3 z-20 cursor-pointer hover:scale-105 transition-all duration-300"
             style={{
-              transform: 'perspective(1000px) rotateY(-40deg) rotateX(-20deg)',
+              transform: 'perspective(1000px) rotateY(-40deg) rotateX(-10deg)',
             }}
           >
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-8 py-5 shadow-xl border border-gray-200">
-              <h3 className="text-gray-800 font-bold text-2xl tracking-wide">ABOUT</h3>
+            <div className="bg-white/30 backdrop-blur-sm rounded-lg px-12 py-8 shadow-xl border border-gray-200/50">
+              <h3 className="text-gray-800 font-bold text-3xl tracking-wide">ABOUT</h3>
             </div>
           </div>
 
@@ -68,8 +68,8 @@ export default function Home() {
               transform: 'perspective(1000px) rotateY(-35deg) rotateX(25deg)',
             }}
           >
-            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-8 py-5 shadow-xl border border-gray-200">
-              <h3 className="text-gray-800 font-bold text-2xl tracking-wide">CONTACT</h3>
+            <div className="bg-white/30 backdrop-blur-sm rounded-lg px-12 py-8 shadow-xl border border-gray-200/50">
+              <h3 className="text-gray-800 font-bold text-3xl tracking-wide">CONTACT</h3>
             </div>
           </div>
 
