@@ -39,7 +39,7 @@ export default function Home() {
           {/* Navigation Cards */}
           {/* PROJECTS card - robot's left (from its POV), 3D perspective */}
           <div 
-  className="absolute top-3/4 left-4 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
+  className="absolute top-3/4 left-3 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
   style={{
     transform: 'perspective(1000px) rotateY(45deg) rotateX(-5deg)',
   }}
