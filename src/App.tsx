@@ -32,18 +32,6 @@ export default function Home() {
         </div>
       </Suspense>
 
-      import Spline from '@splinetool/react-spline/next';
-
-export default function Home() {
-  return (
-    <main>
-      <Spline
-        scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode" 
-      />
-    </main>
-  );
-}
-
 
       {/* These elements only appear after loading is complete */}
       {!isLoading && (
