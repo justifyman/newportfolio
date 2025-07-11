@@ -39,39 +39,39 @@ export default function Home() {
           {/* Navigation Cards */}
           {/* PROJECTS card - robot's left (from its POV), 3D perspective */}
           <div 
-            className="absolute top-3/4 left-1/3 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
-            style={{
-              transform: 'perspective(1000px) rotateY(45deg) rotateX(-5deg)',
-            }}
-          >
-            <div className="bg-white/30 backdrop-blur-sm rounded-lg px-20 py-12 shadow-xl border border-gray-200/50">
-              <h3 className="text-gray-800 font-bold text-5xl tracking-wide">PROJECTS</h3>
-            </div>
-          </div>
+  className="absolute top-3/4 left-4 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
+  style={{
+    transform: 'perspective(1000px) rotateY(45deg) rotateX(-5deg)',
+  }}
+>
+  <div className="bg-white/30 backdrop-blur-sm rounded-lg px-20 py-12 shadow-xl border border-gray-200/50">
+    <h3 className="text-gray-800 font-bold text-5xl tracking-wide">PROJECTS</h3>
+  </div>
+</div>
 
-          {/* ABOUT card - moved significantly to the right, 3D perspective */}
-          <div 
-            className="absolute top-1/4 left-1/3 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
-            style={{
-              transform: 'perspective(1000px) rotateY(-40deg) rotateX(-10deg)',
-            }}
-          >
-            <div className="bg-white/30 backdrop-blur-sm rounded-lg px-20 py-12 shadow-xl border border-gray-200/50">
-              <h3 className="text-gray-800 font-bold text-5xl tracking-wide">ABOUT</h3>
-            </div>
-          </div>
+{/* ABOUT card - far right, upper */}
+<div 
+  className="absolute top-1/4 right-4 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
+  style={{
+    transform: 'perspective(1000px) rotateY(-40deg) rotateX(-10deg)',
+  }}
+>
+  <div className="bg-white/30 backdrop-blur-sm rounded-lg px-20 py-12 shadow-xl border border-gray-200/50">
+    <h3 className="text-gray-800 font-bold text-5xl tracking-wide">ABOUT</h3>
+  </div>
+</div>
 
-          {/* CONTACT card - moved significantly to the right, below ABOUT, 3D perspective */}
-          <div 
-            className="absolute top-2/3 right-1/6 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
-            style={{
-              transform: 'perspective(1000px) rotateY(-35deg) rotateX(25deg)',
-            }}
-          >
-            <div className="bg-white/30 backdrop-blur-sm rounded-lg px-20 py-12 shadow-xl border border-gray-200/50">
-              <h3 className="text-gray-800 font-bold text-5xl tracking-wide">CONTACT</h3>
-            </div>
-          </div>
+{/* CONTACT card - far right, lower */}
+<div 
+  className="absolute top-2/3 right-4 z-20 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
+  style={{
+    transform: 'perspective(1000px) rotateY(-35deg) rotateX(25deg)',
+  }}
+>
+  <div className="bg-white/30 backdrop-blur-sm rounded-lg px-20 py-12 shadow-xl border border-gray-200/50">
+    <h3 className="text-gray-800 font-bold text-5xl tracking-wide">CONTACT</h3>
+  </div>
+</div>
 
           {/* Copyright text in bottom right corner */}
           <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
