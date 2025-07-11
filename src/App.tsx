@@ -51,7 +51,7 @@ export default function Home() {
 
           {/* ABOUT card - moved significantly to the right, 3D perspective */}
           <div 
-            className="absolute top-1/4 right-1/3 z-50 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
+            className="absolute top-1/4 right-1/2 z-50 cursor-pointer hover:scale-110 hover:shadow-2xl hover:bg-white/40 transition-all duration-500 ease-out"
             style={{
               transform: 'perspective(1000px) rotateY(-40deg) rotateX(-10deg)',
             }}
