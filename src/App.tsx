@@ -37,7 +37,7 @@ export default function Home() {
         <>
           {/* Copyright text in bottom right corner */}
           <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
-            <p className="text-gray-400 text-xs font-light">justifydev @ 2025</p>
+            <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
           </div>
           
           {/* Gradient overlay box in bottom right corner */}
