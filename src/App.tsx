@@ -46,7 +46,6 @@ export default function Home() {
               background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)'
             }}
           ></div>
-        </>
       )}
 
       {/* Subtle gradient overlay for depth */}
