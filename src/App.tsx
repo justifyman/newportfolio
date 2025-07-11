@@ -33,7 +33,6 @@ export default function Home() {
       </Suspense>
 
 
-     
 
           {/* Copyright text in bottom right corner */}
           <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
@@ -52,6 +51,5 @@ export default function Home() {
 
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
-    </main>
   );
 }
