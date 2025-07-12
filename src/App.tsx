@@ -9,36 +9,60 @@ export default function Home() {
   useEffect(() => {
     let scrollTimeout: NodeJS.Timeout;
 
+    const smoothScrollTo = (targetX: number, duration = 800) => {
+      const startX = window.scrollX;
+      const distance = targetX - startX;
+      let startTime: number | null = null;
+
+      const step = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeInOut = progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress;
+
+        window.scrollTo({
+          left: startX + distance * easeInOut
+        });
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
-      
+
       if (isScrollingBlocked) return;
-      
+
       setIsScrollingBlocked(true);
-      
+
       const currentScrollX = window.scrollX;
       const pageWidth = window.innerWidth;
       const currentPageIndex = Math.round(currentScrollX / pageWidth);
-      
+
       let targetPage = currentPageIndex;
       if (e.deltaY > 0 && currentPageIndex === 0) {
+        // Scroll down = move right
         targetPage = 1;
       } else if (e.deltaY < 0 && currentPageIndex === 1) {
+        // Scroll up = move left
         targetPage = 0;
       }
-      
+
       if (targetPage !== currentPageIndex) {
         const targetScrollX = targetPage * pageWidth;
-        window.scrollTo({
-          left: targetScrollX,
-          behavior: 'smooth'
-        });
+        smoothScrollTo(targetScrollX, 1000); // slower scroll
       }
-      
+
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setIsScrollingBlocked(false);
-      }, 1000);
+      }, 1100);
     };
 
     document.addEventListener('wheel', handleWheel, { passive: false });
@@ -82,7 +106,7 @@ export default function Home() {
         {!isLoading && (
           <p className="absolute bottom-4 right-4 text-gray-800 text-xs font-light">justifydev @ 2025</p>
         )}
-      
+
         <div 
           className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
           style={{
@@ -98,7 +122,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      
+
       {/* Projects Page */}
       <div className="w-screen h-screen flex-shrink-0 inline-block">
         <ProjectsPage />
