@@ -3,15 +3,13 @@
 @tailwind utilities;
 
 /* Enable smooth horizontal scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  overflow-x: auto;
-  overflow-y: hidden;
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow-x: auto;       /* allow horizontal scrolling */
+  overflow-y: hidden;     /* prevent vertical scrolling */
+  scroll-behavior: auto;  /* use JavaScript for custom smooth scrolling */
 }
 
 /* Ensure main container can scroll horizontally */
