@@ -6,6 +6,28 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [scrollX, setScrollX] = useState(0);
 
+  // Convert vertical scroll to horizontal scroll
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      
+      // Convert vertical scroll (deltaY) to horizontal scroll
+      const scrollAmount = e.deltaY;
+      window.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    };
+
+    // Add wheel event listener
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => setScrollX(window.scrollX);
     window.addEventListener('scroll', handleScroll);
