@@ -4,60 +4,58 @@ import ProjectsPage from './components/ProjectsPage';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [isScrollingBlocked, setIsScrollingBlocked] = useState(false);
 
   useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      if (isScrolling) return;
+      // Block rapid scrolling
+      if (isScrollingBlocked) return;
       
-      const scrollDirection = e.deltaY > 0 ? 1 : -1;
-      const newPage = Math.max(0, Math.min(1, currentPage + scrollDirection));
+      setIsScrollingBlocked(true);
       
-      if (newPage !== currentPage) {
-        setIsScrolling(true);
-        
-        const targetScroll = newPage * window.innerWidth;
-        
+      // Get current scroll position
+      const currentScrollX = window.scrollX;
+      const pageWidth = window.innerWidth;
+      const currentPageIndex = Math.round(currentScrollX / pageWidth);
+      
+      // Determine scroll direction and target page
+      let targetPage = currentPageIndex;
+      if (e.deltaY > 0 && currentPageIndex === 0) {
+        // Scroll down (right) - go to page 1
+        targetPage = 1;
+      } else if (e.deltaY < 0 && currentPageIndex === 1) {
+        // Scroll up (left) - go to page 0
+        targetPage = 0;
+      }
+      
+      // Only scroll if we're changing pages
+      if (targetPage !== currentPageIndex) {
+        const targetScrollX = targetPage * pageWidth;
         window.scrollTo({
-          left: targetScroll,
+          left: targetScrollX,
           behavior: 'smooth'
         });
-        
-        // Update page state after scroll starts
-        setCurrentPage(newPage);
-        
-        setTimeout(() => {
-          setIsScrolling(false);
-        }, 1000);
       }
+      
+      // Unblock scrolling after animation
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setIsScrollingBlocked(false);
+      }, 1000);
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
-      window.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('wheel', handleWheel);
+      clearTimeout(scrollTimeout);
     };
-  }, [currentPage, isScrolling]);
+  }, [isScrollingBlocked]);
 
-  // Track actual scroll position to sync state
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!isScrolling) {
-        const scrollLeft = window.scrollX;
-        const pageWidth = window.innerWidth;
-        const calculatedPage = Math.round(scrollLeft / pageWidth);
-        if (calculatedPage !== currentPage) {
-          setCurrentPage(calculatedPage);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage, isScrolling]);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
