@@ -114,4 +114,4 @@ export default function Home() {
   );
 }
 
-            <p className="text-white text-sm font-light">scroll right to explore projects</p>
+        
