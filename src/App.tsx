@@ -12,27 +12,21 @@ export default function Home() {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      // Block rapid scrolling
       if (isScrollingBlocked) return;
       
       setIsScrollingBlocked(true);
       
-      // Get current scroll position
       const currentScrollX = window.scrollX;
       const pageWidth = window.innerWidth;
       const currentPageIndex = Math.round(currentScrollX / pageWidth);
       
-      // Determine scroll direction and target page
       let targetPage = currentPageIndex;
       if (e.deltaY > 0 && currentPageIndex === 0) {
-        // Scroll down (right) - go to page 1
         targetPage = 1;
       } else if (e.deltaY < 0 && currentPageIndex === 1) {
-        // Scroll up (left) - go to page 0
         targetPage = 0;
       }
       
-      // Only scroll if we're changing pages
       if (targetPage !== currentPageIndex) {
         const targetScrollX = targetPage * pageWidth;
         window.scrollTo({
@@ -41,7 +35,6 @@ export default function Home() {
         });
       }
       
-      // Unblock scrolling after animation
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         setIsScrollingBlocked(false);
@@ -65,9 +58,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black relative">
+    <main className="flex h-screen">
       {/* Main Landing Page */}
-      <div className="min-h-screen w-screen relative overflow-hidden inline-block">
+      <div className="w-screen h-screen flex-shrink-0 relative overflow-hidden inline-block">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
             <div className="text-center space-y-4">
@@ -76,8 +69,6 @@ export default function Home() {
             </div>
           </div>
         )}
-
-        
 
         {/* Spline 3D Scene */}
         <Suspense fallback={null}>
@@ -88,12 +79,10 @@ export default function Home() {
           </div>
         </Suspense>
 
-        {/* Copyright text in bottom right corner */}
         {!isLoading && (
           <p className="absolute bottom-4 right-4 text-gray-800 text-xs font-light">justifydev @ 2025</p>
         )}
       
-        {/* Gradient overlay box in bottom right corner */}
         <div 
           className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
           style={{
@@ -101,10 +90,8 @@ export default function Home() {
           }}
         ></div>
 
-        {/* Subtle gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
 
-        {/* Scroll indicator */}
         {!isLoading && (
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <p className="text-white text-sm font-light transform rotate-12 animate-bounce">scroll to explore projects</p>
@@ -113,11 +100,9 @@ export default function Home() {
       </div>
       
       {/* Projects Page */}
-      <div className="w-screen inline-block">
+      <div className="w-screen h-screen flex-shrink-0 inline-block">
         <ProjectsPage />
       </div>
     </main>
   );
 }
-
-        
