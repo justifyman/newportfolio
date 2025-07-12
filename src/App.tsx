@@ -33,14 +33,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Scroll Indicator */}
-        {!isLoading && (
-          <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
-            <div className="text-white/70 text-sm font-light transform -rotate-12 animate-bounce">
-              scroll down to explore projects
-            </div>
-          </div>
-        )}
+        
 
         {/* Spline 3D Scene */}
         <Suspense fallback={null}>
