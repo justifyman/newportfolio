@@ -5,11 +5,10 @@
 /* Enable smooth horizontal scrolling */
 html {
   scroll-behavior: smooth;
-  overflow: hidden;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: hidden;
   margin: 0;
   padding: 0;
@@ -17,11 +16,8 @@ body {
 
 /* Ensure main container can scroll horizontally */
 main {
-  width: 200vw; /* Total width for both pages */
   height: 100vh;
   display: flex;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 /* Hide scrollbars completely */
@@ -31,5 +27,5 @@ main {
 
 html {
   -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  scrollbar-width: none;     /* Firefox */
 }
