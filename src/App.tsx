@@ -27,7 +27,7 @@ export default function Home() {
       <Suspense fallback={null}>
         <div className="absolute inset-0">
           <Spline
-            scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode" 
+            scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode"
           />
         </div>
       </Suspense>
