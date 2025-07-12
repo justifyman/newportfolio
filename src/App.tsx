@@ -55,7 +55,6 @@ export default function Home() {
         {!isLoading && (
           <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
         )}
-      </div>
       
       {/* Gradient overlay box in bottom right corner */}
       <div 
