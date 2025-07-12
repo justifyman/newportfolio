@@ -1,8 +1,16 @@
 import { Suspense, useState, useEffect } from 'react';
 import Spline from '@splinetool/react-spline';
+import ProjectsPage from './components/ProjectsPage';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -13,7 +21,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black relative overflow-hidden">
+    <main className="bg-black relative">
+      {/* Main Landing Page */}
+      <div className="min-h-screen relative overflow-hidden">
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
           <div className="text-center space-y-4">
@@ -23,9 +33,18 @@ export default function Home() {
         </div>
       )}
 
+        {/* Scroll Indicator */}
+        {!isLoading && (
+          <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20">
+            <div className="text-white/70 text-sm font-light transform -rotate-12 animate-bounce">
+              scroll down to explore projects
+            </div>
+          </div>
+        )}
+
       {/* Spline 3D Scene */}
       <Suspense fallback={null}>
-        <div className="absolute inset-0">
+          <div className="absolute inset-0">
           <Spline
             scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode"
           />
@@ -33,7 +52,7 @@ export default function Home() {
       </Suspense>
 
       {/* Copyright text in bottom right corner */}
-      <div className="absolute bottom-2 right-2 z-20 pointer-events-none">
+        {!isLoading && (
         <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
       </div>
       
@@ -47,6 +66,10 @@ export default function Home() {
 
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
+      </div>
+
+      {/* Projects Page */}
+      <ProjectsPage />
     </main>
   );
 }
