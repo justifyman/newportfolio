@@ -4,51 +4,41 @@ import ProjectsPage from './components/ProjectsPage';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [scrollX, setScrollX] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
 
-  // Locomotive-style scrolling: one scroll = one page
+  // Locomotive-style scrolling
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      // Prevent multiple scrolls during animation
       if (isScrolling) return;
       
-      const scrollDirection = e.deltaY > 0 ? 1 : -1; // 1 for right, -1 for left
+      const scrollDirection = e.deltaY > 0 ? 1 : -1;
       const newPage = Math.max(0, Math.min(1, currentPage + scrollDirection));
       
       if (newPage !== currentPage) {
         setIsScrolling(true);
         setCurrentPage(newPage);
         
+        const targetScroll = newPage * window.innerWidth;
         window.scrollTo({
-          left: newPage * window.innerWidth,
+          left: targetScroll,
           behavior: 'smooth'
         });
         
-        // Reset scrolling flag after animation
         setTimeout(() => {
           setIsScrolling(false);
-        }, 800);
+        }, 1000);
       }
     };
 
-    // Add wheel event listener
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('wheel', handleWheel, { passive: false });
 
-    // Cleanup
     return () => {
-      window.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('wheel', handleWheel);
     };
   }, [currentPage, isScrolling]);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollX(window.scrollX);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
