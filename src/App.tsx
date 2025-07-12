@@ -4,10 +4,10 @@ import ProjectsPage from './components/ProjectsPage';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [scrollY, setScrollY] = useState(0);
+  const [scrollX, setScrollX] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => setScrollX(window.scrollX);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -21,9 +21,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black relative">
+    <main className="bg-black relative flex">
       {/* Main Landing Page */}
-      <div className="min-h-screen relative overflow-hidden">
+      <div className="min-h-screen w-screen relative overflow-hidden flex-shrink-0">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
             <div className="text-center space-y-4">
@@ -62,7 +62,11 @@ export default function Home() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
 
       {/* Projects Page */}
-      <ProjectsPage />
+      <div className="w-screen flex-shrink-0">
+        <ProjectsPage />
+      </div>
     </main>
   );
 }
+
+            <p className="text-white text-sm font-light">scroll right to explore projects</p>

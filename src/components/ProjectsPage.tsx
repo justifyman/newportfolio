@@ -41,7 +41,7 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen w-full bg-black relative overflow-hidden">
       {/* Three.js Background */}
       <ThreeBackground />
       
@@ -117,7 +117,7 @@ export default function ProjectsPage() {
       {/* Scroll to top indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
         <div className="text-white/60 text-sm font-light transform rotate-12 animate-pulse">
-          scroll up to return
+          scroll left to return
         </div>
       </div>
     </div>

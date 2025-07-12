@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Enable horizontal scrolling */
+html, body {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
