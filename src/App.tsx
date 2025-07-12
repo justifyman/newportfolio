@@ -5,18 +5,34 @@ import ProjectsPage from './components/ProjectsPage';
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [scrollX, setScrollX] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
 
-  // Convert vertical scroll to horizontal scroll
+  // Locomotive-style scrolling: one scroll = one page
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      // Convert vertical scroll (deltaY) to horizontal scroll
-      const scrollAmount = e.deltaY;
-      window.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+      // Prevent multiple scrolls during animation
+      if (isScrolling) return;
+      
+      const scrollDirection = e.deltaY > 0 ? 1 : -1; // 1 for right, -1 for left
+      const newPage = Math.max(0, Math.min(1, currentPage + scrollDirection));
+      
+      if (newPage !== currentPage) {
+        setIsScrolling(true);
+        setCurrentPage(newPage);
+        
+        window.scrollTo({
+          left: newPage * window.innerWidth,
+          behavior: 'smooth'
+        });
+        
+        // Reset scrolling flag after animation
+        setTimeout(() => {
+          setIsScrolling(false);
+        }, 800);
+      }
     };
 
     // Add wheel event listener
@@ -26,7 +42,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('wheel', handleWheel);
     };
-  }, []);
+  }, [currentPage, isScrolling]);
 
   useEffect(() => {
     const handleScroll = () => setScrollX(window.scrollX);
@@ -85,7 +101,7 @@ export default function Home() {
         {/* Scroll indicator */}
         {!isLoading && (
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-            <p className="text-white text-sm font-light transform rotate-12 animate-bounce">scroll right to explore projects</p>
+            <p className="text-white text-sm font-light transform rotate-12 animate-bounce">scroll to explore projects</p>
           </div>
         )}
       </div>

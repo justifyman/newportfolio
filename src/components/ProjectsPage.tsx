@@ -117,7 +117,7 @@ export default function ProjectsPage() {
       {/* Scroll to top indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
         <div className="text-white/60 text-sm font-light transform rotate-12 animate-pulse">
-          scroll left to return
+          scroll to return
         </div>
       </div>
     </div>
