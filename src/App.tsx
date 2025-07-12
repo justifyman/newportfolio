@@ -82,14 +82,17 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex h-screen">
+    <main className="flex h-screen w-[200vw]">
       {/* Main Landing Page */}
       <div className="w-screen h-screen flex-shrink-0 relative overflow-hidden inline-block">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
             <div className="text-center space-y-4">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto"></div>
-              <p className="text-white text-lg font-medium">hi, thanks for visiting my site<br/>the site is loading, one moment please</p>
+              <p className="text-white text-lg font-medium">
+                hi, thanks for visiting my site<br />
+                the site is loading, one moment please
+              </p>
             </div>
           </div>
         )}
@@ -97,20 +100,20 @@ export default function Home() {
         {/* Spline 3D Scene */}
         <Suspense fallback={null}>
           <div className="absolute inset-0">
-            <Spline
-              scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode"
-            />
+            <Spline scene="https://prod.spline.design/qDqIeZrc8TLpWxTR/scene.splinecode" />
           </div>
         </Suspense>
 
         {!isLoading && (
-          <p className="absolute bottom-4 right-4 text-gray-800 text-xs font-light">justifydev @ 2025</p>
+          <p className="absolute bottom-4 right-4 text-gray-800 text-xs font-light">
+            justifydev @ 2025
+          </p>
         )}
 
-        <div 
+        <div
           className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
           style={{
-            background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)'
+            background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)',
           }}
         ></div>
 
@@ -118,7 +121,9 @@ export default function Home() {
 
         {!isLoading && (
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-            <p className="text-white text-sm font-light transform rotate-12 animate-bounce">scroll to explore projects</p>
+            <p className="text-white text-sm font-light transform rotate-12 animate-bounce">
+              scroll to explore projects
+            </p>
           </div>
         )}
       </div>
