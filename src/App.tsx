@@ -8,10 +8,7 @@ export default function Home() {
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
-    console.log('Setting up wheel event listener'); // Debug log
-    
     const handleWheel = (e: WheelEvent) => {
-      console.log('Wheel event detected:', e.deltaY, 'Current page:', currentPage, 'Is scrolling:', isScrolling); // Debug log
       e.preventDefault();
       
       if (isScrolling) return;
@@ -19,39 +16,48 @@ export default function Home() {
       const scrollDirection = e.deltaY > 0 ? 1 : -1;
       const newPage = Math.max(0, Math.min(1, currentPage + scrollDirection));
       
-      console.log('New page would be:', newPage); // Debug log
-      
       if (newPage !== currentPage) {
-        console.log('Changing to page:', newPage); // Debug log
         setIsScrolling(true);
-        setCurrentPage(newPage);
         
         const targetScroll = newPage * window.innerWidth;
-        console.log('Scrolling to:', targetScroll); // Debug log
         
         window.scrollTo({
           left: targetScroll,
           behavior: 'smooth'
         });
         
+        // Update page state after scroll starts
+        setCurrentPage(newPage);
+        
         setTimeout(() => {
-          console.log('Scroll complete, re-enabling'); // Debug log
           setIsScrolling(false);
-        }, 800);
+        }, 1000);
       }
     };
 
-    // Try both document and window
-    document.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
-      console.log('Cleaning up wheel event listeners'); // Debug log
-      document.removeEventListener('wheel', handleWheel);
       window.removeEventListener('wheel', handleWheel);
     };
   }, [currentPage, isScrolling]);
 
+  // Track actual scroll position to sync state
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!isScrolling) {
+        const scrollLeft = window.scrollX;
+        const pageWidth = window.innerWidth;
+        const calculatedPage = Math.round(scrollLeft / pageWidth);
+        if (calculatedPage !== currentPage) {
+          setCurrentPage(calculatedPage);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [currentPage, isScrolling]);
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
