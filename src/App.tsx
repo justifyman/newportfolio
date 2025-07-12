@@ -21,9 +21,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-black relative flex">
+    <main className="bg-black relative">
       {/* Main Landing Page */}
-      <div className="min-h-screen w-screen relative overflow-hidden flex-shrink-0">
+      <div className="min-h-screen w-screen relative overflow-hidden inline-block">
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black z-50">
             <div className="text-center space-y-4">
@@ -46,23 +46,30 @@ export default function Home() {
 
         {/* Copyright text in bottom right corner */}
         {!isLoading && (
-          <p className="text-gray-800 text-xs font-light">justifydev @ 2025</p>
+          <p className="absolute bottom-4 right-4 text-gray-800 text-xs font-light">justifydev @ 2025</p>
+        )}
+      
+        {/* Gradient overlay box in bottom right corner */}
+        <div 
+          className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)'
+          }}
+        ></div>
+
+        {/* Subtle gradient overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
+
+        {/* Scroll indicator */}
+        {!isLoading && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <p className="text-white text-sm font-light transform rotate-12 animate-bounce">scroll right to explore projects</p>
+          </div>
         )}
       </div>
       
-      {/* Gradient overlay box in bottom right corner */}
-      <div 
-        className="absolute bottom-0 right-0 w-64 h-32 z-10 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to bottom, #c4c4c4, #b6b6b6)'
-        }}
-      ></div>
-
-      {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
-
       {/* Projects Page */}
-      <div className="w-screen flex-shrink-0">
+      <div className="w-screen inline-block">
         <ProjectsPage />
       </div>
     </main>

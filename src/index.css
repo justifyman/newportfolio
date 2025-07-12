@@ -2,8 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Enable horizontal scrolling */
-html, body {
+/* Enable smooth horizontal scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure main container can scroll horizontally */
+main {
+  width: 200vw; /* Total width for both pages */
+  height: 100vh;
+  display: flex;
   overflow-x: auto;
   overflow-y: hidden;
 }
