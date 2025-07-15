@@ -11,7 +11,6 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrollY, setScrollY] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (isLoading) return;
