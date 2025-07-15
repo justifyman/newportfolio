@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import LoadingSequence from './components/LoadingSequence';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Work from './pages/Work';
@@ -10,8 +11,11 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrollY, setScrollY] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (isLoading) return;
+    
     if (isLoading) return;
     
     const sections = ['home', 'work', 'about', 'contact'];
@@ -46,7 +50,14 @@ function App() {
   const handleLoadingComplete = () => {
     setIsLoading(false);
   };
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
 
+
+  if (isLoading) {
+    return <LoadingSequence onComplete={handleLoadingComplete} />;
+  }
 
   return (
     <div className="bg-black text-white font-lexend overflow-x-hidden">
