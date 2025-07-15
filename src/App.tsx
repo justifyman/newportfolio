@@ -49,7 +49,7 @@ function App() {
   };
 
   if (isLoading) {
-    return <LoadingSequence onComplete={handleLoadingComplete} />;
+    return <PageTransition onComplete={handleLoadingComplete} />;
   }
 
   return (
