@@ -53,7 +53,7 @@ const PageTransition: FC<PageTransitionProps> = ({ children }) => {
         >
           {children}
         </div>
-      </div>
+
     );
   }
 
