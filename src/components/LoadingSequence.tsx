@@ -1,60 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { FC, useEffect, useState } from "react";
 
-interface LoadingSequenceProps {
-  onComplete: () => void;
+interface PageTransitionProps {
+  children: React.ReactNode;
 }
 
-const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
-  const [stage, setStage] = useState<0 | 1 | 2 | 3>(0);
+const PageTransition: FC<PageTransitionProps> = ({ children }) => {
+  const [showBlack, setShowBlack] = useState(true);
+  const [showBlue, setShowBlue] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(true);
 
   useEffect(() => {
-    const timers = [
-      setTimeout(() => setStage(1), 300),   // Black slides up
-      setTimeout(() => setStage(2), 600),   // Blue slides up
-      setTimeout(() => {
-        setStage(3);
-        onComplete();
-      }, 900),                              // Animation complete
-    ];
+    const timer1 = setTimeout(() => setShowBlack(false), 500);   // Black slides up
+    const timer2 = setTimeout(() => setShowBlue(false), 1000);   // Blue slides up
+    const timer3 = setTimeout(() => setIsTransitioning(false), 1500); // Show site
 
-    return () => timers.forEach(clearTimeout);
-  }, [onComplete]);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
+  }, []);
 
-  return (
-    <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
-      {/* Blue Background: always there under overlays */}
-      <div className="absolute inset-0 bg-blue-600" />
+  if (isTransitioning) {
+    return (
+      <div className="fixed inset-0 z-50 overflow-hidden">
+        {/* Black overlay - topmost */}
+        <div
+          className={`absolute inset-0 bg-black transition-transform duration-500 ease-in-out ${
+            showBlack ? "translate-y-0" : "-translate-y-full"
+          }`}
+          style={{ zIndex: 30 }}
+        />
 
-      {/* Stage 0 & 1: Black overlay slides up */}
-      <AnimatePresence>
-        {(stage === 0 || stage === 1) && (
-          <motion.div
-            key="black"
-            className="absolute inset-0 bg-black"
-            initial={{ y: 0 }}
-            animate={{ y: stage === 1 ? '-100%' : 0 }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          />
-        )}
-      </AnimatePresence>
+        {/* Blue overlay - middle */}
+        <div
+          className={`absolute inset-0 bg-blue-950 transition-transform duration-500 ease-in-out ${
+            showBlue ? "translate-y-0" : "-translate-y-full"
+          }`}
+          style={{ zIndex: 20 }}
+        />
 
-      {/* Stage 2: Blue overlay slides up to reveal site */}
-      <AnimatePresence>
-        {stage === 2 && (
-          <motion.div
-            key="blue"
-            className="absolute inset-0 bg-blue-600"
-            initial={{ y: 0 }}
-            animate={{ y: '-100%' }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-          />
-        )}
-      </AnimatePresence>
-    </div>
-  );
+        {/* Content stays hidden below during transition */}
+        <div
+          className={`absolute inset-0 transition-transform duration-500 ease-in-out ${
+            !showBlue ? "translate-y-full" : "translate-y-0"
+          }`}
+          style={{ zIndex: 10 }}
+        >
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
 };
 
-export default LoadingSequence;
+export default PageTransition;
