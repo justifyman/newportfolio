@@ -1,41 +1,37 @@
-import { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-interface PageTransitionProps {
-  children?: React.ReactNode;
-  onComplete?: () => void;
-}
-
-const PageTransition: FC<PageTransitionProps> = ({ children, onComplete }) => {
+const TestSlide = () => {
   const [showBlack, setShowBlack] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBlack(false);
-      if (onComplete) onComplete();
-    }, 500);
-
+    const timer = setTimeout(() => setShowBlack(false), 1000);
     return () => clearTimeout(timer);
-  }, [onComplete]);
+  }, []);
 
   return (
-    <>
-      {children && <div className="relative z-0">{children}</div>}
+    <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+      {/* Background content */}
+      <div style={{ height: "100%", backgroundColor: "lightblue" }}>
+        <h1 style={{ textAlign: "center", paddingTop: "40vh" }}>Site Content</h1>
+      </div>
 
       {/* Black overlay */}
-      <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "black",
-            transition: "transform 500ms ease-in-out",
-            transform: showBlack ? "translateY(0)" : "translateY(-100%)",
-            zIndex: 30,
-          }}
-        />
-      </div>
-    </>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "black",
+          transform: showBlack ? "translateY(0)" : "translateY(-100%)",
+          transition: "transform 0.5s ease-in-out",
+          zIndex: 9999,
+          pointerEvents: "none",
+        }}
+      />
+    </div>
   );
 };
 
-export default PageTransition;
+export default TestSlide;
