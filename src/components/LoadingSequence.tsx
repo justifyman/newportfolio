@@ -11,25 +11,19 @@ const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
   useEffect(() => {
     const timers = [
       setTimeout(() => setStage(1), 300),   // Black slides up
-      setTimeout(() => setStage(2), 600),   // Purple slides right
-      setTimeout(() => setStage(3), 900),   // Black slides down
+      setTimeout(() => setStage(2), 600),   // Blue slides up
       setTimeout(() => {
-        setStage(4);
+        setStage(3);
         onComplete();
-      }, 1200),
+      }, 900),
     ];
 
-    return () => {
-      timers.forEach(clearTimeout);
-    };
+    return () => timers.forEach(clearTimeout);
   }, [onComplete]);
 
   return (
     <div className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none">
-      {/* Solid Purple Background */}
-      <div className="absolute inset-0 bg-purple-700" />
-
-      {/* Stage 0 & 1: Black slides up to reveal purple */}
+      {/* Stage 0 & 1: Black overlay slides up to reveal blue */}
       {stage < 2 && (
         <motion.div
           className="absolute inset-0 bg-black"
@@ -39,22 +33,12 @@ const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
         />
       )}
 
-      {/* Stage 2: Purple slides right to reveal black again */}
-      {stage === 2 && (
+      {/* Stage 1 & 2: Blue overlay slides up to reveal site */}
+      {stage >= 1 && stage < 3 && (
         <motion.div
-          className="absolute inset-0 bg-purple-700"
-          initial={{ x: 0 }}
-          animate={{ x: '100%' }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        />
-      )}
-
-      {/* Stage 3: Black slides down to reveal site */}
-      {stage === 3 && (
-        <motion.div
-          className="absolute inset-0 bg-black"
-          initial={{ y: 0 }}
-          animate={{ y: '100%' }}
+          className="absolute inset-0 bg-blue-600"
+          initial={{ y: stage === 1 ? 0 : '-100%' }}
+          animate={{ y: stage === 2 ? '-100%' : 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         />
       )}
