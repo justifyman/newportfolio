@@ -68,11 +68,12 @@ function App() {
       </motion.div>
       
       <div className="pt-20">
-        <PageTransition />
+        <PageTransition>
         <Home />
         <Work />
         <About />
         <Contact />
+          </PageTransition>
       </div>
 
       {/* Floating Elements */}
