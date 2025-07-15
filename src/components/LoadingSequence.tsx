@@ -21,13 +21,17 @@ const PageTransition: FC<PageTransitionProps> = ({ children, onComplete }) => {
     <>
       {children && <div className="relative z-0">{children}</div>}
 
-      {/* Black overlay that slides up */}
+      {/* Black overlay */}
       <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
         <div
-          className={`absolute inset-0 bg-black transition-transform duration-500 ease-in-out ${
-            showBlack ? "translate-y-0" : "-translate-y-full"
-          }`}
-          style={{ zIndex: 30 }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "black",
+            transition: "transform 500ms ease-in-out",
+            transform: showBlack ? "translateY(0)" : "translateY(-100%)",
+            zIndex: 30,
+          }}
         />
       </div>
     </>
