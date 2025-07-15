@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import PageTransition from './components/LoadingSequence';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Work from './pages/Work';
