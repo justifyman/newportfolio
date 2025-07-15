@@ -68,7 +68,7 @@ function App() {
       </motion.div>
       
       <div className="pt-20">
-        <LoadingSequence />
+        <PageTransition />
         <Home />
         <Work />
         <About />
