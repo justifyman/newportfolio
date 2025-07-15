@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageTransition from './components/LoadingSequence';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
@@ -49,6 +49,7 @@ function App() {
   };
 
   if (isLoading) {
+    // Render loading overlay with onComplete handler
     return <PageTransition onComplete={handleLoadingComplete} />;
   }
 
@@ -68,12 +69,11 @@ function App() {
       </motion.div>
       
       <div className="pt-20">
-        <PageTransition>
+        {/* Render pages normally without wrapping in PageTransition */}
         <Home />
         <Work />
         <About />
         <Contact />
-        </PageTransition>
       </div>
 
       {/* Floating Elements */}
