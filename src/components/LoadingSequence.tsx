@@ -11,7 +11,7 @@ const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsAnimating(false);
-      setTimeout(onComplete, 300); // Wait for animation to complete
+      setTimeout(onComplete, 100); // Wait for animation to complete
     }, 1000); // Delay before slide starts
 
     return () => clearTimeout(timer);
