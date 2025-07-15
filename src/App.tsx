@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoadingSequence from './components/LoadingSequence';
+import PageTransition from './components/LoadingSequence';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Work from './pages/Work';
@@ -68,6 +68,7 @@ function App() {
       </motion.div>
       
       <div className="pt-20">
+        <LoadingSequence />
         <Home />
         <Work />
         <About />
