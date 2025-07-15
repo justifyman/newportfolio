@@ -47,10 +47,6 @@ function App() {
     setIsLoading(false);
   };
 
-  if (isLoading) {
-    // Render loading overlay with onComplete handler
-    return <PageTransition onComplete={handleLoadingComplete} />;
-  }
 
   return (
     <div className="bg-black text-white font-lexend overflow-x-hidden">
