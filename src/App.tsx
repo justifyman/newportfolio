@@ -14,11 +14,9 @@ function App() {
 
   useEffect(() => {
     if (isLoading) return;
-    
-    if (isLoading) return;
-    
+
     const sections = ['home', 'work', 'about', 'contact'];
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -50,54 +48,63 @@ function App() {
     setIsLoading(false);
   };
 
-  if (isLoading) {
-    return <LoadingSequence onComplete={handleLoadingComplete} />;
-  }
-
   return (
-    <div className="bg-black text-white font-lexend overflow-x-hidden">
-      <motion.div 
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-500"
-        style={{
-          backgroundColor: scrollY > 50 ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.7)',
-          borderBottom: scrollY > 50 ? '1px solid rgba(255, 255, 255, 0.1)' : 'none'
-        }}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+    <div className="bg-black text-white font-lexend overflow-x-hidden relative">
+      {/* Loading overlay */}
+      {isLoading && <LoadingSequence onComplete={handleLoadingComplete} />}
+
+      {/* Fade-in site content */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
       >
-        <Navigation activeSection={activeSection} />
+        {/* Navigation */}
+        <motion.div
+          className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-500"
+          style={{
+            backgroundColor: scrollY > 50 ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.7)',
+            borderBottom: scrollY > 50 ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
+          }}
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <Navigation activeSection={activeSection} />
+        </motion.div>
+
+        {/* Page sections */}
+        <div className="pt-20">
+          <Home />
+          <Work />
+          <About />
+          <Contact />
+        </div>
+
+        {/* Floating Elements */}
+        <div className="fixed inset-0 pointer-events-none z-0">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/10 rounded-full"
+              style={{
+                left: `${20 + i * 15}%`,
+                top: `${30 + i * 10}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.1, 0.3, 0.1],
+              }}
+              transition={{
+                duration: 3 + i,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </div>
       </motion.div>
-      
-      <div className="pt-20">
-        <Home />
-        <Work />
-        <About />
-        <Contact />
-      </div>
-      {/* Floating Elements */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-white/10 rounded-full"
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + i * 10}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.1, 0.3, 0.1],
-            }}
-            transition={{
-              duration: 3 + i,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.5,
-            }}
-          />
-        ))}
-      </div>
     </div>
   );
 }
