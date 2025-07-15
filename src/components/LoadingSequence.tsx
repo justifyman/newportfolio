@@ -1,37 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const TestSlide = () => {
-  const [showBlack, setShowBlack] = useState(true);
+const TestPageTransition = () => {
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowBlack(false), 1000);
+    const timer = setTimeout(() => setVisible(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
-      {/* Background content */}
-      <div style={{ height: "100%", backgroundColor: "lightblue" }}>
-        <h1 style={{ textAlign: "center", paddingTop: "40vh" }}>Site Content</h1>
+    <>
+      {/* Your actual content underneath */}
+      <div style={{ height: "100vh", backgroundColor: "#7ec8e3", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <h1 style={{ color: "black" }}>Here is your REAL site content!</h1>
       </div>
 
       {/* Black overlay */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: "black",
-          transform: showBlack ? "translateY(0)" : "translateY(-100%)",
-          transition: "transform 0.5s ease-in-out",
-          zIndex: 9999,
-          pointerEvents: "none",
-        }}
-      />
-    </div>
+      {visible && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "black",
+            zIndex: 9999,
+            transition: "transform 0.5s ease-in-out",
+            transform: visible ? "translateY(0)" : "translateY(-100%)",
+          }}
+        />
+      )}
+    </>
   );
 };
 
-export default TestSlide;
+export default TestPageTransition;
