@@ -49,10 +49,6 @@ function App() {
   const handleLoadingComplete = () => {
     setIsLoading(false);
   };
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-  };
-
 
   if (isLoading) {
     return <LoadingSequence onComplete={handleLoadingComplete} />;
