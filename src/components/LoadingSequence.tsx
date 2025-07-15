@@ -1,27 +1,31 @@
 import { FC, useEffect, useState } from "react";
 
 interface PageTransitionProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  onComplete?: () => void;  // optional
 }
 
-const PageTransition: FC<PageTransitionProps> = ({ children }) => {
+const PageTransition: FC<PageTransitionProps> = ({ children, onComplete }) => {
   const [showBlack, setShowBlack] = useState(true);
   const [showBlue, setShowBlue] = useState(true);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setShowBlack(false), 500);
-    const timer2 = setTimeout(() => setShowBlue(false), 1000);
+    const timer2 = setTimeout(() => {
+      setShowBlue(false);
+      if (onComplete) onComplete();  // call onComplete when done
+    }, 1000);
 
     return () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, []);
+  }, [onComplete]);
 
   return (
     <>
-      {/* Render actual site content here */}
-      <div className="relative z-0">{children}</div>
+      {/* Render actual site content only if children exist */}
+      {children && <div className="relative z-0">{children}</div>}
 
       {/* Overlays on top */}
       <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
