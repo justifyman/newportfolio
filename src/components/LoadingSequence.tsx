@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface LoadingSequenceProps {
   onComplete: () => void;
@@ -10,17 +10,17 @@ const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
 
   useEffect(() => {
     const timers = [
-      // Stage 0: Black screen (1 second)
-      setTimeout(() => setStage(1), 1000),
-      // Stage 1: Black slides up to reveal purple (1 second)
-      setTimeout(() => setStage(2), 2000),
-      // Stage 2: Purple slides right to reveal black (1 second)
-      setTimeout(() => setStage(3), 3000),
-      // Stage 3: Black slides down to reveal site (1 second)
+      // Stage 0: Black screen (0.5 seconds)
+      setTimeout(() => setStage(1), 500),
+      // Stage 1: Black slides up to reveal purple (0.5 seconds)
+      setTimeout(() => setStage(2), 1000),
+      // Stage 2: Purple slides right to reveal black (0.5 seconds)
+      setTimeout(() => setStage(3), 1500),
+      // Stage 3: Black slides down to reveal site (0.5 seconds)
       setTimeout(() => {
         setStage(4);
-        setTimeout(onComplete, 500); // Small delay before showing main site
-      }, 4000),
+        setTimeout(onComplete, 500);
+      }, 2000),
     ];
 
     return () => {
@@ -30,7 +30,10 @@ const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-[9999] overflow-hidden">
-      {/* Stage 0: Initial black screen */}
+      {/* Purple background - always there */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500" />
+
+      {/* Stage 0 & 1: Black screen that slides up */}
       <motion.div
         className="absolute inset-0 bg-black"
         initial={{ y: 0 }}
@@ -38,70 +41,36 @@ const LoadingSequence: React.FC<LoadingSequenceProps> = ({ onComplete }) => {
           y: stage >= 1 ? '-100%' : 0 
         }}
         transition={{ 
-          duration: 1, 
-          ease: "easeInOut",
-          delay: stage >= 1 ? 0 : 0
+          duration: 0.5, 
+          ease: "easeInOut"
         }}
       />
 
-      {/* Stage 1: Purple background revealed */}
+      {/* Stage 2: Purple slides right to reveal black */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500"
-        initial={{ opacity: 0 }}
+        initial={{ x: 0 }}
         animate={{ 
-          opacity: stage >= 1 && stage < 2 ? 1 : 0,
           x: stage >= 2 ? '100%' : 0
         }}
         transition={{ 
-          opacity: { duration: 0.3, delay: stage >= 1 ? 0.8 : 0 },
-          x: { duration: 1, ease: "easeInOut", delay: stage >= 2 ? 0 : 0 }
+          duration: 0.5, 
+          ease: "easeInOut"
         }}
       />
 
-      {/* Stage 2: Black background revealed again */}
+      {/* Stage 2 & 3: Black background that slides down */}
       <motion.div
         className="absolute inset-0 bg-black"
-        initial={{ opacity: 0 }}
+        initial={{ y: 0 }}
         animate={{ 
-          opacity: stage >= 2 && stage < 3 ? 1 : 0,
-          y: stage >= 3 ? '100%' : 0
+          y: stage >= 3 ? '100%' : (stage >= 2 ? 0 : '100%')
         }}
         transition={{ 
-          opacity: { duration: 0.3, delay: stage >= 2 ? 0.8 : 0 },
-          y: { duration: 1, ease: "easeInOut", delay: stage >= 3 ? 0 : 0 }
+          duration: 0.5, 
+          ease: "easeInOut"
         }}
       />
-
-      {/* Loading indicator during transitions */}
-      <AnimatePresence>
-        {stage < 4 && (
-          <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white font-lexend"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center space-x-2">
-              <motion.div
-                className="w-2 h-2 bg-white rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-              />
-              <motion.div
-                className="w-2 h-2 bg-white rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-              />
-              <motion.div
-                className="w-2 h-2 bg-white rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
