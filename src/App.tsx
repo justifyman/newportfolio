@@ -64,13 +64,10 @@ function App() {
       </motion.div>
       
       <div className="pt-20">
-        {/* Render pages normally without wrapping in PageTransition */}
         <Home />
         <Work />
         <About />
         <Contact />
-      </div>
-
       {/* Floating Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {[...Array(6)].map((_, i) => (
