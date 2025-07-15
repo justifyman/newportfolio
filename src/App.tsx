@@ -68,6 +68,7 @@ function App() {
         <Work />
         <About />
         <Contact />
+      </div>
       {/* Floating Elements */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {[...Array(6)].map((_, i) => (
