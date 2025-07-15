@@ -52,7 +52,7 @@ const Home: React.FC = () => {
         </div>
 
         {/* Main Headline */}
-        <div className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black font-light font-serif tracking-wide leading-none mb-8">
+        <div className="text-6xl md:text-8xl lg:text-9xl xl:text-[12rem] 2xl:text-[14rem] font-black font-light font-serif tracking-wide leading-none mb-8">
           <h1 className="block">
             <span className="font-serif">frontend-</span><br />done <span className="text-purple-500 font-serif">right.</span>
           </h1>
