@@ -73,7 +73,7 @@ function App() {
         <Work />
         <About />
         <Contact />
-          </PageTransition>
+        </PageTransition>
       </div>
 
       {/* Floating Elements */}
