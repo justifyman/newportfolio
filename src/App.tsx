@@ -50,11 +50,16 @@ function App() {
 
   return (
     <div className="bg-black text-white font-lexend overflow-x-hidden relative">
-      {/* Black screen overlay */}
+      {/* Loading overlay */}
       {isLoading && <LoadingSequence onComplete={handleLoadingComplete} />}
 
-      {/* Site content (immediately rendered) */}
-      <div>
+      {/* Fade-in site content */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.8, ease: 'easeInOut' }}
+      >
+        {/* Navigation */}
         <motion.div
           className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-500"
           style={{
@@ -68,6 +73,7 @@ function App() {
           <Navigation activeSection={activeSection} />
         </motion.div>
 
+        {/* Page sections */}
         <div className="pt-20">
           <Home />
           <Work />
@@ -75,7 +81,7 @@ function App() {
           <Contact />
         </div>
 
-        {/* Floating background elements */}
+        {/* Floating Elements */}
         <div className="fixed inset-0 pointer-events-none z-0">
           {[...Array(6)].map((_, i) => (
             <motion.div
@@ -98,7 +104,7 @@ function App() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
