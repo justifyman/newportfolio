@@ -25,39 +25,39 @@ const PageTransition: FC<PageTransitionProps> = ({ children }) => {
     };
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="fixed inset-0 z-50 overflow-hidden">
-        {/* Black screen - first layer */}
-        <div
-          className={absolute inset-0 bg-black transition-transform duration-500 ease-in-out ${
-            showBlack ? "translate-y-0" : "-translate-y-full"
-          }}
-          style={{ zIndex: 30 }}
-        />
+  return (
+    <>
+      {/* Site content - always rendered but initially hidden behind overlays */}
+      <div
+        className={`transition-transform duration-500 ease-in-out fixed inset-0 z-10 ${
+          showContent ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        {children}
+      </div>
 
-        {/* Dark blue screen - second layer */}
-        <div
-          className={absolute inset-0 bg-blue-950 transition-transform duration-500 ease-in-out ${
-            showBlue ? "translate-y-0" : "-translate-y-full"
-          }}
-          style={{ zIndex: 20 }}
-        />
+      {/* Overlay container */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+          {/* Black screen - first layer */}
+          <div
+            className={`absolute inset-0 bg-black transition-transform duration-500 ease-in-out ${
+              showBlack ? "translate-y-0" : "-translate-y-full"
+            }`}
+            style={{ zIndex: 30 }}
+          />
 
-        {/* Content lift-up transition */}
-        <div
-          className={absolute inset-0 transition-transform duration-500 ease-in-out ${
-            showContent ? "translate-y-full" : "translate-y-0"
-          }}
-          style={{ zIndex: 10 }}
-        >
-          {children}
+          {/* Dark blue screen - second layer */}
+          <div
+            className={`absolute inset-0 bg-blue-950 transition-transform duration-500 ease-in-out ${
+              showBlue ? "translate-y-0" : "-translate-y-full"
+            }`}
+            style={{ zIndex: 20 }}
+          />
         </div>
-
-    );
-  }
-
-  return <>{children}</>;
+      )}
+    </>
+  );
 };
 
 export default PageTransition;
