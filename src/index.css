@@ -49,3 +49,7 @@ html.has-scroll-smooth {
   height: 100vh;
   overflow: hidden;
 }
+
+body {
+  background-color: #0f172a; /* blue-900 */
+}
